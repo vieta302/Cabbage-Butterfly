@@ -1,16 +1,15 @@
+library(readxl)
 library(tidyverse)
 library(dplyr)
-library(readxl)
 library(lubridate)
 library(reshape)
 library(ggpubr)
-library(ggplot2)
 rm(list = ls())
 
 setwd("~/Desktop/Fall 2022/DATA 331/Final /cabbage_butterfly-main")
 df_raw <- read.csv("data/main.csv")
 
-#Remove unecessary rows
+#Remove unnecessary rows
 df_raw <-subset(df_raw, Sex != "unknown")
 
 #Formating and choosing columns 
@@ -19,88 +18,88 @@ df <- df_raw %>%
                 "LWingLength", "LWingWidth","RWingLength", "RWingWidth") %>%
   dplyr::filter(LWingLength > 0, LWingWidth > 0, RWingLength > 0, RWingWidth >0)
 
-#plot left wing length
-df1 <- df %>%
+#Left wing length by Sex
+df_lwl <- df %>%
   group_by(Sex) %>%
   summarise(min.LWingLength = min(LWingLength),
             mean.LWingLength = mean(LWingLength),
             median.LWingLength = median(LWingLength),
             max.LWingLength = max(LWingLength))
 
-df1 <- pivot_longer(df1, cols = 2:5, 
+df_lwl <- pivot_longer(df_lwl, cols = 2:5, 
                     names_to = "functions", values_to = "measurement")
 
-a <- ggplot(df1, aes(fill = functions, x = Sex, y = measurement)) +
+lwl <- ggplot(df_lwl, aes(fill = functions, x = Sex, y = measurement)) +
   geom_bar(position = "dodge", stat = "identity") + ylim(0, 40)+
   theme_minimal() +
   scale_fill_manual(name = "Values", 
-                    labels = c("max", "mean","median", "min"), 
-                    values = c("#FF9900", "#99CCFF", "#006600", "#CC88CC")) +
+                    labels = c("Max", "Mean","Median", "Min"), 
+                    values = c("#009E73", "#F0E442", "#0072B2", "#D55E00")) +
   theme(axis.title.x = element_blank(), axis.title.y = element_blank())
 
-#plot left wing width
-df2 <- df %>%
+#Left wing width by Sex
+df_lww <- df %>%
   group_by(Sex) %>%
   summarise(min.LWingWidth = min(LWingWidth),
             mean.LWingWidth = mean(LWingWidth),
             median.LWingWidth = median(LWingWidth),
             max.LWingWidth = max(LWingWidth))
 
-df2 <- pivot_longer(df2, cols = 2:5, 
+df_lww <- pivot_longer(df_lww, cols = 2:5, 
                     names_to = "functions", values_to = "measurement")
 
-b <- ggplot(df2, aes(fill = functions, x = Sex, y = measurement)) +
+lww <- ggplot(df_lww, aes(fill = functions, x = Sex, y = measurement)) +
   geom_bar(position = "dodge", stat = "identity")+ ylim(0, 30)+
   theme_minimal()+
   scale_fill_manual(name = "Values", 
-                    labels = c("max", "mean","median", "min"), 
-                    values = c("#FF9900", "#99CCFF", "#006600", "#CC88CC")) +
+                    labels = c("Max", "Mean","Median", "Min"), 
+                    values = c("#009E73", "#F0E442", "#0072B2", "#D55E00")) +
   theme(axis.title.x = element_blank(), axis.title.y = element_blank())
 
-#plot right wing length
-df3 <- df %>%
+#Right wing length by Sex
+df_rwl <- df %>%
   group_by(Sex) %>%
   summarise(min.RWingLength = min(RWingLength),
             mean.RWingLength = mean(RWingLength),
             median.RWingLength = median(RWingLength),
             max.RWingLength = max(RWingLength))
 
-df3 <- pivot_longer(df3, cols = 2:5,
+df_rwl <- pivot_longer(df_rwl, cols = 2:5,
                     names_to = "functions", values_to = "measurement")
 
-c <- ggplot(df3, aes(fill = functions, x = Sex, y = measurement)) +
+rwl <- ggplot(df_rwl, aes(fill = functions, x = Sex, y = measurement)) +
   geom_bar(position = "dodge", stat = "identity") + ylim(0, 40)+
   theme_minimal()+ 
   scale_fill_manual(name = "Values", 
-                    labels = c("max", "mean","median", "min"), 
-                    values = c("#FF9900", "#99CCFF", "#006600", "#CC88CC")) +
+                    labels = c("Max", "Mean","Median", "Min"), 
+                    values = c("#009E73", "#F0E442", "#0072B2", "#D55E00")) +
   theme(axis.title.x = element_blank(), axis.title.y = element_blank())
 
-#plot right wing width
-df4 <- df %>%
+#Right wing width by Sex
+df_rww <- df %>%
   group_by(Sex) %>%
   summarise(min.RWingWidth = min(RWingWidth),
             mean.RWingWidth = mean(RWingWidth),
             median.RWingWidth = median(RWingWidth),
             max.RWingWidth = max(RWingWidth))
 
-df4 <- pivot_longer(df4, cols = 2:5, 
+df_rww <- pivot_longer(df_rww, cols = 2:5, 
                     names_to = "functions", values_to = "measurement")
 
-d <- ggplot(df4, aes(fill = functions, x = Sex, y = measurement)) +
+rww <- ggplot(df_rww, aes(fill = functions, x = Sex, y = measurement)) +
   geom_bar(position = "dodge", stat = "identity")+ ylim(0, 30)+
   theme_minimal() +
   scale_fill_manual(name = "Values", 
-                    labels = c("max", "mean","median", "min"), 
-                    values = c("#FF9900", "#99CCFF", "#006600", "#CC88CC")) +
+                    labels = c("Max", "Mean","Median", "Min"), 
+                    values = c("#009E73", "#F0E442", "#0072B2", "#D55E00")) +
   theme(axis.title.x = element_blank(), axis.title.y = element_blank())
 
-#combine
-figure <- ggarrange(a, c, b, d, ncol = 2, nrow = 2, 
+#Finalized graph
+graph <- ggarrange(lwl, rwl, lww, rww, ncol = 2, nrow = 2, 
                     common.legend = TRUE, legend = "right",
                     labels = c("Left Wing Length", "Right Wing Length",
                                "Left Wing Width","Right Wing Width"),
-                    font.label = list(size = 14, color = "black", face = "plain"))
+                    font.label = list(size = 12, color = "black", face = "plain"))
 
-annotate_figure(figure, top = text_grob("Wing Span Visualization by Sex", face = "bold", size = 20))
+annotate_figure(graph, top = text_grob("Wing Length/Width by Sex", size = 14))
 

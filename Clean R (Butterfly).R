@@ -53,7 +53,7 @@ df$RBlackPatchApex <- round(as.numeric(df$RBlackPatchApex), digits = 3)
 df$RAnteriorSpotM3 <- round(as.numeric(df$RAnteriorSpotM3), digits = 3)
 df$RPosteriorSpotCu2 <- round(as.numeric(df$RPosteriorSpotCu2), digits = 3)
 
-#Remove unecessary rows 
+#Remove unnecessary rows 
 df_na <- df %>%
   drop_na()
 
