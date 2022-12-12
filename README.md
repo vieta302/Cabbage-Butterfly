@@ -111,15 +111,48 @@ df$Year <- paste(df$Year, "0s", sep = "")
 df_final <- df %>%
   count(Year)
 ```
-- 
+- From the chart, it is clear that the research has been going on for a while, with the most significant number of records recorded in the 1920s and 1960s
+
 <div align = "center">
-<img src = "https://github.com/vieta302/Cabbage-Butterfly/blob/main/Graphs%20/Wing%20Length:Width%20by%20Sex.png" width = "800")>
+<img src = "https://github.com/vieta302/Cabbage-Butterfly/blob/main/Graphs%20/Total%20by%20Decades.png" width = "800")>
 </div>
 
+---
+## T-Test
+We analyzed the data to find out whether "sex" plays a role in determining the length of a butterfly's wings.
+1. T-test 1: Comparing the Males' Left wing length and Females' Left wing length.
+- Null hypothesis: They are equal
+- Alternative hypothesis: They are different
+- Conclusion: There is not enough evidence to conclude that the Males' Left wing length and Females' Left wing length are equal in size. 
 
+```
+        Welch Two Sample t-test
 
+data:  male$LWingLength and female$LWingLength
+t = 2.0643, df = 714.81, p-value = 0.03935
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ 0.01629975 0.64996010
+sample estimates:
+mean of x mean of y 
+ 23.59465  23.26152
+```
+2. T-test 2: Comparing the Males' Right wing length and Females' Right wing length.
+- Null hypothesis: They are equal
+- Alternative hypothesis: They are different
+- Conclusion: There is not enough evidence to conclude that the Males' Right wing length and Females' Right wing length are equal in size. 
+```
+        Welch Two Sample t-test
 
-
+data:  male$RWingLength and female$RWingLength
+t = 2.1626, df = 750.32, p-value = 0.03089
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ 0.03393599 0.70197777
+sample estimates:
+mean of x mean of y 
+ 23.54725  23.17930 
+```
 
 
 
