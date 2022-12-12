@@ -1,4 +1,7 @@
 # Cabbage_Butterfly
+<div align = "center">
+<img src = "https://github.com/vieta302/Cabbage-Butterfly/blob/main/Types-of-Butterfly.jpeg" width = "450")>
+</div>
 
 ## It's Coming Home Team Members:
 Viet Anh Nguyen, Houssam Hallouch, Dawit Tadele
@@ -83,13 +86,35 @@ write.csv(df_main, "~/Desktop/Fall 2022/DATA 331/Final /cabbage_butterfly-main/d
 
 ---
 ## Visualizations
-I. Total number of Ladybugs for each State:
+I. Wing Length/Width by Country 
+- The bar chart illustrates the average length of both right/left wings in each country.
+- From the graph, it is apparent that averages from the America region are slightly higher than European countries.
 
+<div align = "center">
+<img src = "https://github.com/vieta302/Cabbage-Butterfly/blob/main/Graphs%20/Wing%20Length:Width%20by%20Country.png" width = "600")>
+</div>
 
+II. Wing Length/Width by Sex
+- We uses Descriptive Statistics in order to calculate the wings' length/width in terms of their maximum value, minimum value, average and median.
+- Based on the charts, we can conclude that both sex shares similar wing's length/width.
 
+<div align = "center">
+<img src = "https://github.com/vieta302/Cabbage-Butterfly/blob/main/Graphs%20/Wing%20Length:Width%20by%20Sex.png" width = "600")>
+</div>
 
+III. Total number of Butterflies for each decade
+*Prep: We first have to group the years by decades.
+```
+df$Year <-substring(df$Year, 1,3)
+df$Year <- paste(df$Year, "0s", sep = "")
 
-
+df_final <- df %>%
+  count(Year)
+```
+- 
+<div align = "center">
+<img src = "https://github.com/vieta302/Cabbage-Butterfly/blob/main/Graphs%20/Wing%20Length:Width%20by%20Sex.png" width = "800")>
+</div>
 
 
 
