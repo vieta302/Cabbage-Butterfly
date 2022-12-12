@@ -12,7 +12,7 @@ df_raw <- read.csv("data/main.csv")
 #Remove unnecessary rows
 df_raw <-subset(df_raw, Sex != "unknown")
 
-#Formating and choosing columns 
+#Formatting and choosing columns 
 df <- df_raw %>%
   dplyr::select("ID", "Sex", 
                 "LWingLength", "LWingWidth","RWingLength", "RWingWidth") %>%
