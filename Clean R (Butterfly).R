@@ -22,12 +22,13 @@ df <- df_raw %>%
 df %>%
   dplyr::distinct(ID)
 
-#Clean "Sex" 
+#
+4.Clean "Sex" 
 df$Sex[df$Sex == "female"] <- "Female"
 df$Sex[df$Sex == "F"] <- "Female"
-df$Sex[df$Sex == "F?"] <- "Female"
 df$Sex[df$Sex == "male"] <- "Male"
 df$Sex[df$Sex == "M"] <- "Male"
+df$Sex[df$Sex == "F?"] <- "unknown"
 df$Sex[df$Sex == "female?"] <- "unknown"
 df$Sex[df$Sex =="male?"] <- "unknown"
 df$Sex[is.na(df$Sex)] <- "unknown"
